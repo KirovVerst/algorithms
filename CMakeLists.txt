@@ -3,5 +3,7 @@ project(algorithms)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES src/main.cpp src/sorting.cpp)
+include_directories(include)
+
 add_executable(algorithms ${SOURCE_FILES})
