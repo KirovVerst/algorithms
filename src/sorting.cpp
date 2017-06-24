@@ -42,3 +42,17 @@ void quick_sort(double *arr, int l, int r, bool reverse) {
 void quick_sort(double *arr, int size, bool reverse) {
     quick_sort(arr, 0, size - 1, reverse);
 }
+
+
+void insertion_sort(double *arr, int size, bool reverse) {
+    Comparator comparator = reverse ? is_descending : is_ascending;
+    for (int i = 1; i < size; i++) {
+        double key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && comparator(key, arr[j])) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
