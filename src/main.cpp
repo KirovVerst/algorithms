@@ -4,7 +4,7 @@
 int main() {
     int n = 5;
     double arr[] = {3, 5, -1, 4, -2};
-    insertion_sort(&arr[0], n, true);
+    selection_sort(&arr[0], n, false);
     for (int i = 0; i < n; i++) {
         std::cout << arr[i] << " ";
     }
