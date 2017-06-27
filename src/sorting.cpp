@@ -69,3 +69,5 @@ void selection_sort(double *arr, int size, bool is_asc) {
         std::swap(arr[index], arr[i]);
     }
 }
+
+
