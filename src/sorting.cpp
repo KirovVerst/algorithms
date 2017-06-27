@@ -70,4 +70,45 @@ void selection_sort(double *arr, int size, bool is_asc) {
     }
 }
 
+void merge(double *arr, int left, int split, int right, Comparator &comparator) {
+    int temp_size = right - left;
+    double *t = new double[temp_size];
+    int pos1 = left, pos2 = split, pos3 = 0;
+    while ((pos1 < split) && (pos2 < right)) {
+        if (comparator(arr[pos1], arr[pos2])) {
+            t[pos3++] = arr[pos1++];
+        } else {
+            t[pos3++] = arr[pos2++];
+        }
+    }
 
+    while (pos1 < split) {
+        t[pos3++] = arr[pos1++];
+    }
+
+    while (pos2 < right) {
+        t[pos3++] = arr[pos2++];
+    }
+
+    for (pos3 = 0; pos3 < temp_size; pos3++) {
+        arr[left + pos3] = t[pos3];
+    }
+
+    delete[] t;
+}
+
+void merge_sort(double *arr, int l, int r, Comparator &comparator) {
+    if (r - l <= 1) {
+        return;
+    }
+    int split = (l + r) / 2;
+    merge_sort(arr, l, split, comparator);
+    merge_sort(arr, split, r, comparator);
+    merge(arr, l, split, r, comparator);
+};
+
+
+void merge_sort(double *arr, int size, bool is_asc) {
+    Comparator comparator = is_asc ? lower_than : larger_than;
+    merge_sort(arr, 0, size, comparator);
+}

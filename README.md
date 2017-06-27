@@ -3,6 +3,7 @@
 1. Quick-Sort
 2. Insertion-Sort
 3. Selection-Sort
+4. Merge-Sort
 
 ## Searching
 1. Binary search
