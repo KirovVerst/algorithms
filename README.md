@@ -1,4 +1,10 @@
-# algorithms
+# Algorithms
+
+## Basic algorithms
+1. Fibonacci number
+2. Greatest Common Divisor
+3. Least Common Multiple
+
 ## Sorting
 1. Quick-Sort
 2. Insertion-Sort
