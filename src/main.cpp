@@ -1,11 +1,15 @@
 #include <iostream>
-#include "fundamentals.h"
+#include "sorting.h"
+
+using namespace std;
 
 int main() {
-    long long a[] = {1, 2, 2, 1, 4};
-    size_t size = 5;
-    std::pair<bool, long long> res = find_majority_element(&a[0], size);
-    std::cout << res.first << std::endl;
-    std::cout << res.second << std::endl;
+    double a[] = {1, 2, 2, 1, 4};
+    int size = 5;
+    quick_sort(&a[0], size, false);
+    for (int i = 0; i < size; i++) {
+        cout << a[i] << ' ';
+    }
+    cout << endl;
     return 0;
 }

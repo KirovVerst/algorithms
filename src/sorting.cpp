@@ -12,35 +12,52 @@ bool larger_than(const double &a, const double &b) {
     return a > b;
 }
 
-void quick_sort(double *arr, int l, int r, bool is_asc) {
 
-    Comparator comparator1 = is_asc ? larger_than : lower_than;
-    Comparator comparator2 = is_asc ? lower_than : larger_than;
-    double x = arr[l + (r - l) / 2];
-    int i = l;
-    int j = r;
-    while (i < j) {
-        while (comparator1(arr[i], x)) i++;
+std::pair<int, int> quick_sort_partition(double *arr, int low, int high, Comparator &comparator) {
+    std::pair<int, int> bounds;
+    if (high - low <= 1) {
+        if (arr[high] < arr[low])
+            std::swap(arr[high], arr[low]);
+        bounds.first = low;
+        bounds.second = high;
+        return bounds;
+    }
 
-        while (comparator2(arr[j], x)) j--;
+    int mid = low;
+    double pivot = arr[high];
+    while (mid <= high) {
+        if (arr[mid] == pivot) {
+            mid++;
 
-        if (i <= j) {
-            std::swap(arr[i], arr[j]);
-            i++;
-            j--;
+        } else if (comparator(pivot, arr[mid])) {
+            std::swap(arr[low++], arr[mid++]);
+        } else {
+            std::swap(arr[mid], arr[high--]);
         }
     }
-    if (i < r) {
-        quick_sort(arr, i, r, is_asc);
+
+    bounds.first = low;
+    bounds.second = mid - 1;
+    return bounds;
+}
+
+void quick_sort(double *arr, int l, int r, Comparator &comparator) {
+    if (l >= r) {
+        return;
     }
-    if (l < j) {
-        quick_sort(arr, l, j, is_asc);
-    }
+
+    int k = (l + r) / 2;
+    std::swap(arr[r], arr[k]);
+    std::pair<int, int> bounds = quick_sort_partition(arr, l, r, comparator);
+
+    quick_sort(arr, l, bounds.first - 1, comparator);
+    quick_sort(arr, bounds.second + 1, r, comparator);
 }
 
 
 void quick_sort(double *arr, int size, bool is_asc) {
-    quick_sort(arr, 0, size - 1, is_asc);
+    Comparator comparator = is_asc ? larger_than : lower_than;
+    quick_sort(arr, 0, size - 1, comparator);
 }
 
 
