@@ -4,6 +4,7 @@
 1. Fibonacci number
 2. Greatest Common Divisor
 3. Least Common Multiple
+4. Linear time majority vote
 
 ## Sorting
 1. Quick-Sort
