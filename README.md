@@ -5,6 +5,7 @@
 2. Greatest Common Divisor
 3. Least Common Multiple
 4. Linear time majority vote
+5. Number of inversions
 
 ## Sorting
 1. Quick-Sort
