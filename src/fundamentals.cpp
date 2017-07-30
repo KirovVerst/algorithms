@@ -1,4 +1,5 @@
 #include <utility>
+#include <string>
 #include "fundamentals.h"
 
 long long gcd(long long a, long long b) {
@@ -90,3 +91,39 @@ long long get_number_of_inversions(double *a, size_t left, size_t right) {
     inversions += merge(a, left, m, right);
     return inversions;
 }
+
+long long levenshtein_edit_distance(const std::string &str1, const std::string &str2) {
+    size_t n = str1.size() + 1;
+    size_t m = str2.size() + 1;
+
+    auto dist = new int *[n];
+    for (int i = 0; i < n; i++) {
+        dist[i] = new int[m];
+    }
+    for (int i = 0; i < n; i++) dist[i][0] = i;
+    for (int j = 0; j < m; j++) dist[0][j] = j;
+
+
+    for (int i = 1; i < n; i++) {
+        for (int j = 1; j < m; j++) {
+            int insertion = dist[i][j - 1] + 1, deletion = dist[i - 1][j] + 1;
+            int match = dist[i - 1][j - 1], mismatch = dist[i - 1][j - 1] + 1;
+            dist[i][j] = std::min(insertion, deletion);
+            if (str1[i - 1] == str2[j - 1]) {
+                dist[i][j] = std::min(dist[i][j], match);
+            } else {
+                dist[i][j] = std::min(dist[i][j], mismatch);
+            }
+        }
+    }
+
+    long long result = dist[n - 1][m - 1];
+
+    for (int i = 0; i < n; i++) {
+        delete[] dist[i];
+    }
+    delete[] dist;
+
+    return result;
+}
+

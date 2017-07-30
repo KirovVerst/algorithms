@@ -6,6 +6,7 @@
 3. Least Common Multiple
 4. Linear time majority vote
 5. Number of inversions
+6. Levenstein edit distance
 
 ## Sorting
 1. Quick-Sort

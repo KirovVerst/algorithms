@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-    double a[] = {7, 2, 2, 1, 4};
-    size_t size = 5;
-    cout << get_number_of_inversions(&a[0], 0, size);
+    string a = "editing";
+    string b = "distance";
+    cout << levenshtein_edit_distance(a, b) << endl;
     return 0;
 }
